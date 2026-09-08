@@ -216,7 +216,7 @@
         }
 
         async function sendMessage() {
-            // API Key yang sudah terpasang otomatis
+            // API Key AQ. milikmu sudah terpasang otomatis dengan benar
             const apiKey = "AQ.Ab8RN6IUjggPEALUi6zmBhvJzWm1C3XA0YS7ORE2l-E37V1W2g"; 
             
             const inputEl = document.getElementById('userInput');
@@ -230,11 +230,15 @@
             history.scrollTop = history.scrollHeight;
 
             try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+                // Menggunakan header x-goog-api-key agar kompatibel penuh dengan key berformat AQ.
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`;
 
                 const res = await fetch(url, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'x-goog-api-key': apiKey
+                    },
                     body: JSON.stringify({
                         contents: [{
                             parts: [{
@@ -255,7 +259,7 @@
                 history.scrollTop = history.scrollHeight;
             } catch (err) {
                 console.error(err);
-                history.innerHTML += `<div class="p-4 bg-red-50 border border-red-200 rounded-2xl text-red-600 max-w-[85%] leading-relaxed">⚠️ Gagal terhubung ke server AI. Periksa koneksi internetmu atau kuota API Key!</div>`;
+                history.innerHTML += `<div class="p-4 bg-red-50 border border-red-200 rounded-2xl text-red-600 max-w-[85%] leading-relaxed">⚠️ Gagal terhubung ke server AI: ${err.message}</div>`;
             }
         }
     </script>
