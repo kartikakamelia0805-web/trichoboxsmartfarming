@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRICHOBOX // Platform Pintar Budidaya Trichoderma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        agri: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f4f6f4; color: #2d3748; }
+        input, select, textarea { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #2d3748 !important; }
+        input:focus { border-color: #16a34a !important; ring: 2px solid #16a34a !important; outline: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased font-sans selection:bg-agri-600 selection:text-white">
+
+    <!-- Header Elegan & Terang -->
+    <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50 shadow-xs">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-3.5 h-3.5 bg-agri-600 rounded-full animate-pulse"></div>
+                <div>
+                    <h1 class="font-bold text-sm tracking-wide text-slate-800">TRICHOBOX<span class="text-agri-600">.AGRI</span></h1>
+                    <p class="text-[10px] text-slate-500 font-medium">SISTEM PANTAU & KONSULTASI BUDIDAYA RAMAH LINGKUNGAN</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 text-xs font-mono">
+                <span class="px-3 py-1 bg-agri-50 border border-agri-200 text-agri-700 rounded-full font-medium">STATUS KOTAK: AKTIF</span>
+                <span class="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-600 rounded-full hidden sm:inline-block" id="localTime">--:--:--</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full space-y-6">
+
+        <!-- Navigation Menu Tabs -->
+        <div class="flex border-b border-slate-200 gap-2 font-medium text-xs overflow-x-auto">
+            <button onclick="switchTab('flow')" id="tab-flow" class="px-5 py-3 border-b-2 border-agri-600 text-agri-700 bg-white shadow-xs rounded-t-lg transition whitespace-nowrap">01 // Panduan & Alur Tani</button>
+            <button onclick="switchTab('telemetry')" id="tab-telemetry" class="px-5 py-3 border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition whitespace-nowrap">02 // Pantau Kondisi Kotak</button>
+            <button onclick="switchTab('calc')" id="tab-calc" class="px-5 py-3 border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition whitespace-nowrap">03 // Takaran Air & Pupuk</button>
+            <button onclick="switchTab('ai')" id="tab-ai" class="px-5 py-3 border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition whitespace-nowrap">04 // Tanya Asisten Tani</button>
+        </div>
+
+        <!-- TAB 1: PANDUAN & ALUR TANI -->
+        <div id="content-flow" class="space-y-6">
+            <div class="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-2xl shadow-xs space-y-6">
+                <div>
+                    <h2 class="text-base font-bold text-slate-800">Panduan Praktis Budidaya Jamur Trichoderma</h2>
+                    <p class="text-xs text-slate-500 mt-1">Ikuti 4 langkah mudah ini agar pertumbuhan mikroorganisme penolong tanaman berjalan optimal:</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+                    <div class="p-5 bg-slate-50/70 border border-slate-200 rounded-xl space-y-2 hover:border-agri-300 transition">
+                        <span class="inline-block px-2.5 py-1 bg-agri-100 text-agri-800 font-bold rounded text-[10px]">TAHAP 01</span>
+                        <h4 class="text-slate-800 font-bold text-sm">Sterilisasi Media Tumbuh</h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            Siapkan media seperti jagung giling atau beras. Kukus selama 30–45 menit untuk mensterilkan media dari spora jamur liar pengganggu.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-slate-50/70 border border-slate-200 rounded-xl space-y-2 hover:border-agri-300 transition">
+                        <span class="inline-block px-2.5 py-1 bg-agri-100 text-agri-800 font-bold rounded text-[10px]">TAHAP 02</span>
+                        <h4 class="text-slate-800 font-bold text-sm">Inokulasi Bibit Murni</h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            Tebar bibit jamur Trichoderma secara merata saat media sudah benar-benar dingin di tempat yang bersih untuk menghindari kontaminasi.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-slate-50/70 border border-slate-200 rounded-xl space-y-2 hover:border-agri-300 transition">
+                        <span class="inline-block px-2.5 py-1 bg-agri-100 text-agri-800 font-bold rounded text-[10px]">TAHAP 03</span>
+                        <h4 class="text-slate-800 font-bold text-sm">Inkubasi dalam TRICHOBOX</h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            Simpan media di dalam kotak inkubasi tertutup. Pantau suhu dan kelembapan secara berkala agar miselium merata dalam 3–7 hari.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-slate-50/70 border border-slate-200 rounded-xl space-y-2 hover:border-agri-300 transition">
+                        <span class="inline-block px-2.5 py-1 bg-agri-100 text-agri-800 font-bold rounded text-[10px]">TAHAP 04</span>
+                        <h4 class="text-slate-800 font-bold text-sm">Panen & Aplikasi Lapangan</h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            Saat media dipenuhi warna hijau cerah khas Trichoderma, jamur siap dipanen dan dilarutkan ke air untuk melindungi akar tanaman.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: PANTAU KONDISI KOTAK (TELEMETRI) -->
+        <div id="content-telemetry" class="hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
+                    <p class="text-xs font-medium text-slate-500 uppercase">Suhu Ruang Kotak</p>
+                    <div class="text-3xl font-bold text-slate-800 mt-2">27.5<span class="text-agri-600 text-lg">°C</span></div>
+                    <span class="inline-block mt-2 text-[10px] font-semibold text-agri-800 bg-agri-50 px-2.5 py-1 rounded-md border border-agri-200">KONDISI IDEAL</span>
+                </div>
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
+                    <p class="text-xs font-medium text-slate-500 uppercase">Kelembapan Udara</p>
+                    <div class="text-3xl font-bold text-slate-800 mt-2">85.0<span class="text-agri-600 text-lg">%</span></div>
+                    <span class="inline-block mt-2 text-[10px] font-semibold text-agri-800 bg-agri-50 px-2.5 py-1 rounded-md border border-agri-200">OPTIMAL (80-90%)</span>
+                </div>
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
+                    <p class="text-xs font-medium text-slate-500 uppercase">Fase Inkubasi</p>
+                    <div class="text-2xl font-bold text-slate-800 mt-2">HARI KE-3</div>
+                    <span class="inline-block mt-2 text-[10px] font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">PENYEBARAN MISELIUM</span>
+                </div>
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
+                    <p class="text-xs font-medium text-slate-500 uppercase">Status Sterilitas</p>
+                    <div class="text-2xl font-bold text-agri-600 mt-2">AMAN [0.2%]</div>
+                    <span class="inline-block mt-2 text-[10px] font-semibold text-agri-800 bg-agri-50 px-2.5 py-1 rounded-md border border-agri-200">BEBAS KONTAMINAN</span>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+                <div class="flex justify-between items-center mb-3 text-xs">
+                    <span class="font-semibold text-slate-700">// MONITOR KAMERA KOTAK (LIVE FEED)</span>
+                    <span class="text-agri-600 font-semibold flex items-center gap-2"><span class="w-2 h-2 bg-agri-600 rounded-full animate-ping"></span>KAMERA TERHUBUNG</span>
+                </div>
+                <div class="aspect-video bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-center font-mono text-xs text-slate-400">
+                    [MENAMPILKAN VISUAL PERTUMBUHAN JAMUR DI DALAM KOTAK]
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: TAKARAN AIR & PUPUK -->
+        <div id="content-calc" class="hidden space-y-6">
+            <div class="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-xs max-w-xl space-y-5">
+                <div>
+                    <h3 class="text-base font-bold text-slate-800">Kalkulator Larutan Jamur</h3>
+                    <p class="text-xs text-slate-500 mt-1">Masukkan berat hasil panen Trichoderma untuk menghitung kebutuhan air pelarut secara akurat.</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-2">BERAT JAMUR PANEN (GRAM):</label>
+                    <input type="number" id="gramInput" value="15" min="0" oninput="calculateDose()" class="w-full px-4 py-3 rounded-xl border text-sm font-medium shadow-xs">
+                </div>
+                <div class="p-5 bg-agri-50 border border-agri-200 rounded-xl space-y-2">
+                    <span class="text-xs font-semibold text-agri-800">VOLUME AIR BERSIH YANG DIPERLUKAN:</span>
+                    <div class="text-3xl font-bold text-agri-700" id="literResult">1.00 Liter</div>
+                    <p class="text-xs text-slate-600" id="doseInstruction">Campurkan 15 gram jamur ke dalam 1.00 Liter air bersih sebelum disiramkan ke area perakaran tanaman.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: ASISTEN TANI (AI) -->
+        <div id="content-ai" class="hidden space-y-4">
+            <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-xs flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700">// KONSULTASI AHLI TANI DIGITAL</span>
+                <span class="text-agri-800 bg-agri-50 px-3 py-1 rounded-full border border-agri-200 font-medium">SIAP MEMBANTU</span>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl h-[450px] flex flex-col shadow-xs text-xs">
+                <div id="chatHistory" class="p-6 flex-grow overflow-y-auto space-y-4">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 max-w-[85%] leading-relaxed shadow-xs">
+                        <span class="text-agri-700 font-bold block mb-1">[ASISTEN TANI]:</span>
+                        Halo! Ada yang ingin didiskusikan seputar proses sterilisasi media, tanda-tanda jamur yang sehat, atau cara pengaplikasian pupuk hayati ini? Silakan tanyakan di sini ya.
+                    </div>
+                </div>
+                <div class="p-4 border-t border-slate-200 flex gap-3 bg-white rounded-b-2xl">
+                    <input type="text" id="userInput" placeholder="Contoh: Bagaimana cara mengatasi jika media ditumbuhi jamur hitam?" class="flex-grow px-4 py-3 rounded-xl border text-xs shadow-xs" onkeypress="if(event.key==='Enter') sendMessage()">
+                    <button onclick="sendMessage()" class="px-6 py-3 bg-agri-600 hover:bg-agri-700 text-white font-bold rounded-xl transition text-xs shadow-xs cursor-pointer">KIRIM</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500">
+        TRICHOBOX AG-TECH LAB // Inovasi Pertanian Modern & Berkelanjutan
+    </footer>
+
+    <!-- Script Utama -->
+    <script>
+        // Update jam lokal secara langsung
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('localTime').innerText = now.toLocaleTimeString() + " WIB";
+        }, 1000);
+
+        function switchTab(tab) {
+            ['flow', 'telemetry', 'calc', 'ai'].forEach(t => {
+                document.getElementById('content-' + t).classList.add('hidden');
+                document.getElementById('tab-' + t).className = "px-5 py-3 border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition whitespace-nowrap text-xs font-medium";
+            });
+            document.getElementById('content-' + tab).classList.remove('hidden');
+            document.getElementById('tab-' + tab).className = "px-5 py-3 border-b-2 border-agri-600 text-agri-700 bg-white shadow-xs rounded-t-lg transition whitespace-nowrap text-xs font-medium";
+        }
+
+        function calculateDose() {
+            const g = parseFloat(document.getElementById('gramInput').value) || 0;
+            const l = (g / 15).toFixed(2);
+            document.getElementById('literResult').innerText = l + " Liter";
+            document.getElementById('doseInstruction').innerText = `Campurkan ${g} gram jamur ke dalam ${l} Liter air bersih sebelum disiramkan ke area perakaran tanaman.`;
+        }
+
+        async function sendMessage() {
+            // API Key yang sudah terpasang otomatis
+            const apiKey = "AQ.Ab8RN6IUjggPEALUi6zmBhvJzWm1C3XA0YS7ORE2l-E37V1W2g"; 
+            
+            const inputEl = document.getElementById('userInput');
+            const prompt = inputEl.value.trim();
+            const history = document.getElementById('chatHistory');
+
+            if (!prompt) return;
+
+            history.innerHTML += `<div class="p-4 bg-agri-50 border border-agri-200 rounded-2xl text-slate-800 max-w-[85%] ml-auto leading-relaxed shadow-xs"><span class="text-slate-500 font-bold block mb-1">[KAMU]:</span>${prompt}</div>`;
+            inputEl.value = '';
+            history.scrollTop = history.scrollHeight;
+
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: "Bertindaklah sebagai Ahli Tani dan Konsultan Pertanian TRICHOBOX yang sangat ramah, sabar, dan menggunakan bahasa sehari-hari yang sederhana dan mudah dipahami oleh petani awam. Jawab pertanyaan berikut dengan jelas dan praktis: " + prompt
+                            }]
+                        }]
+                    })
+                });
+
+                const data = await res.json();
+                
+                if (data.error) {
+                    throw new Error(data.error.message || 'Terjadi kesalahan pada sistem API.');
+                }
+
+                const reply = data.candidates[0].content.parts[0].text;
+                history.innerHTML += `<div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 max-w-[85%] leading-relaxed shadow-xs"><span class="text-agri-700 font-bold block mb-1">[ASISTEN TANI]:</span>${reply}</div>`;
+                history.scrollTop = history.scrollHeight;
+            } catch (err) {
+                console.error(err);
+                history.innerHTML += `<div class="p-4 bg-red-50 border border-red-200 rounded-2xl text-red-600 max-w-[85%] leading-relaxed">⚠️ Gagal terhubung ke server AI. Periksa koneksi internetmu atau kuota API Key!</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
